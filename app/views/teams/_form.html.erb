@@ -1,0 +1,53 @@
+<%= form_with(model: team, local: true) do |form| %>
+  <% if team.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(team.errors.count, "error") %> prohibited this team from being saved:</h2>
+
+      <ul>
+      <% team.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :abbreviation %>
+    <%= form.text_field :abbreviation %>
+  </div>
+
+  <%= form.fields_for :manager do |builder| %>
+    <div class="field">
+      <%= builder.label :name_manager %>
+      <%= builder.text_field :name %>
+    </div>
+    <div class="field">
+      <%= builder.label :age_manager %>
+      <%= builder.text_field :age %>
+    </div>
+  <% end %>
+  
+  <%= form.nested_fields_for :players do |p| %>
+    <div class="field">
+      <%= p.label :name_player %>
+      <%= p.text_field :name %>
+    </div>
+    <div class="field">
+      <%= p.label :age_player %>
+      <%= p.text_field :age %>
+    </div>
+  <% end %>
+
+  <%= form.add_nested_fields_link :players do %>
+    <span>New player</span>
+  <% end %>
+  
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

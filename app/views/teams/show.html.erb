@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @team.name %>
+</p>
+
+<p>
+  <strong>Abbreviation:</strong>
+  <%= @team.abbreviation %>
+</p>
+
+<p>
+  <strong>Manager:</strong>
+  <%= @team.manager.name %> <%= @team.manager.age %> 
+</p>
+
+<p>
+  <strong>Players:</strong>
+  <%= @team.players.each do |player| %>
+    <%= player.name %> <%= player.age %><br> 
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_team_path(@team) %> |
+<%= link_to 'Back', teams_path %>
